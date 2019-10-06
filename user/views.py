@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -7,7 +7,7 @@ from django.views.generic import DetailView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse
 from django.urls import reverse_lazy
-from employee.forms import UserForm
+from user.forms import UserForm
 from ems.decorators import admin_hr_required, admin_only
 
 def index(request):
@@ -46,7 +46,7 @@ def user_list(request):
     print(request.role)
     context = {}
     context['users'] = User.objects.all()
-    context['title'] = 'Employees'
+    context['title'] = 'User'
     return render(request, 'employee/index.html', context)
 
 @login_required(login_url="/login/")
@@ -56,7 +56,6 @@ def user_details(request, id=None):
     return render(request, 'employee/details.html', context)
 
 @login_required(login_url="/login/")
-@admin_only
 def user_add(request):
     context = {}
     if request.method == 'POST':
@@ -89,13 +88,13 @@ def user_edit(request, id=None):
 @login_required(login_url="/login/")
 def user_delete(request, id=None):
     user = get_object_or_404(User, id=id)
-    if request.method == 'POST':
-        user.delete()
-        return HttpResponseRedirect(reverse('user_list'))
-    else:
-        context = {}
-        context['user'] = user
-        return render(request, 'employee/delete.html', context)
+    # if request.method == 'POST':
+    user.delete()
+    return HttpResponseRedirect(reverse('user_list'))
+    # else:
+    #     context = {}
+    #     context['user'] = user
+    #     return render(request, 'employee/delete.html', context)
 
 
 

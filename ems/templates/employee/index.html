@@ -6,9 +6,7 @@
     <div class="col-sm-8">
         <p>
             <div class="float-left"><h3>List of User</h3></div>
-            {% if request.role == 'Admin' %}
             <a class="btn btn-success float-right" href="{%  url 'user_add' %}">Add user</a>
-            {% endif %}
         </p>
         <div class="table-responsive-sm">
         {% if users %}

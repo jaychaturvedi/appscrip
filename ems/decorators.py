@@ -8,7 +8,7 @@ def admin_hr_required(view_func):
         if request.role in allowed_roles:
             return view_func(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('employee_list'))
+            return HttpResponseRedirect(reverse('user_list'))
     return wrap
 
 def admin_only(view_func):
@@ -16,6 +16,6 @@ def admin_only(view_func):
         if request.role == "Admin":
             return view_func(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('employee_list'))
+            return HttpResponseRedirect(reverse('user_list'))
     return wrap
         
