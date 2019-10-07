@@ -21,12 +21,12 @@
                 {% for user in users %}
                     <tr>
                         <th scope="row">
-                            {{user.first_name}} {{user.last_name}}
+                            {{user.username}}
                             <span class="badge badge-default">{{user.email}}</span>
                         </td>
                         <td class="text-center">
                             <a class="btn btn-primary" href="{%  url 'user_details' user.id %}">Details</a>
-                            {% if request.role == 'Admin' %}
+                            {% if user.is_active %}
                             <a class="btn btn-warning" href="{%  url 'user_edit' user.id %}">Edit</a>
                             <a class="btn btn-danger" href="{%  url 'user_delete' user.id %}">Delete</a>
                             {% endif %}

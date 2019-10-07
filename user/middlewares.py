@@ -25,6 +25,6 @@ class RoleMiddleware:
         """
         if request.user.is_authenticated:
             request.role = None
-            groups = request.user.groups.all()
-            if groups:
-                request.role = groups[0].name
+            groups = request.user.objects.all()
+            if groups.is_admin:
+                request.role = 'Admin'

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import  authenticate, login, get_user_model
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 from django.views.generic.edit import UpdateView
@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.urls import reverse_lazy
 from user.forms import UserForm
 from ems.decorators import admin_hr_required, admin_only
+User = get_user_model()
 
 def index(request):
     return HttpResponseRedirect(reverse('user_list'))
@@ -43,7 +44,6 @@ def user_logout(request):
 
 @login_required(login_url="/login/")
 def user_list(request):
-    print(request.role)
     context = {}
     context['users'] = User.objects.all()
     context['title'] = 'User'
