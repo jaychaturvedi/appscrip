@@ -50,7 +50,9 @@ class User(AbstractBaseUser):
     username   = models.CharField(max_length=255, blank=False, null=False,unique=True)
     contact   = models.IntegerField(blank=True, null=True)
     password = models.CharField(max_length=50)
-
+    userrole = (('Admin','Admin'),('User','User'))
+    role = models.CharField(max_length=50,blank=False, null=False, choices = userrole,default = 'User')
+    
     is_active   = models.BooleanField(default=True) # can login 
     staff       = models.BooleanField(default=False) # staff user non superuser
     admin       = models.BooleanField(default=False) # superuser 
@@ -92,12 +94,14 @@ class User(AbstractBaseUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    # userrole = (('Admin','Admin'),('User','User'))
+    # role = models.CharField(max_length=50,blank=False, null=False, choices = userrole,default = 'User')
+    
     # class Meta:
     #     ordering = ('-salary',)
 
-    # def __str__(self):
-    #     return "{0} {1}".format(self.user.first_name, self.user.last_name)
+    def __str__(self):
+        return "{0} {1}".format(self.user.username, self.user.role)
 
 
 @receiver(post_save, sender=User)

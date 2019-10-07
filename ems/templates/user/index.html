@@ -26,7 +26,7 @@
                         </td>
                         <td class="text-center">
                             <a class="btn btn-primary" href="{%  url 'user_details' user.id %}">Details</a>
-                            {% if user.is_active %}
+                            {% if request.user.role == "Admin" %}
                             <a class="btn btn-warning" href="{%  url 'user_edit' user.id %}">Edit</a>
                             <a class="btn btn-danger" href="{%  url 'user_delete' user.id %}">Delete</a>
                             {% endif %}

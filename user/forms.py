@@ -10,11 +10,10 @@ User = get_user_model()
 
 #userform
 class UserForm(forms.ModelForm):
-    city = forms.CharField(widget=forms.TextInput)
     
     class Meta:
         model = User
-        fields = ['username','email','city','contact','address','password']
+        fields = ['username','email','city','contact','address','password','role']
         # excludes = ['']
         widgets = {
         'password': forms.PasswordInput(),
