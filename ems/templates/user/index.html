@@ -23,6 +23,8 @@
                         <th scope="row">
                             {{user.username}}
                             <span class="badge badge-default">{{user.email}}</span>
+                            <span class="badge badge-default">{{user.role}}</span>
+
                         </td>
                         <td class="text-center">
                             <a class="btn btn-primary" href="{%  url 'user_details' user.id %}">Details</a>
